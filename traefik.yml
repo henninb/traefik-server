@@ -21,3 +21,54 @@ providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
+http:
+  routers:
+    pfsense-router:
+      rule: "Host(`pfsense`) || Host(`pfsense.lan`)"
+      service: pfsense-service
+      tls:
+        certResolver: default
+    ddwrt-router:
+      rule: "Host(`ddwrt`) || Host(`ddwrt.lan`)"
+      service: ddwrt-service
+      tls:
+        certResolver: default
+    finance-router:
+      rule: "Host(`finance`) || Host(`finance.lan`)"
+      service: finance-service
+      tls:
+        certResolver: default
+    proxmox-router:
+      rule: "Host(`proxmox`) || Host(`proxmox.lan`)"
+      service: proxmox-service
+      tls:
+        certResolver: default
+    pihole-router:
+      rule: "Host(`pihole`) || Host(`pihole.lan`)"
+      service: pihole-service
+      tls:
+        certResolver: default
+
+  services:
+    pfsense-service:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.10.1:8006"
+    ddwrt-service:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.10.2"
+    finance-service:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.10.10:3000"
+            weight: 10
+    proxmox-service:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.10.4:8006"
+    pihole-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.10"
+
