@@ -1,10 +1,14 @@
-version: "3.7"
+version: '3.7'
+
 services:
   traefik-server:
-    build: .
-    image: traefik-server
+    image: traefik:v1.7 # The official Traefik docker image
+    #build: .
     container_name: traefik-server
     hostname: traefik-server
+    command: --api --docker # Enables the web UI and tells Traefik to listen to docker
     ports:
-      - "443:443"
-      - "8484:80"
+      - "8084:80"     # The HTTP port
+      - "8083:8080" # The Web UI (enabled by --api)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

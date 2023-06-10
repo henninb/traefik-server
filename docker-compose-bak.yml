@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+  traefik-server:
+    build: .
+    image: traefik-server
+    container_name: traefik-server
+    hostname: traefik-server
+    ports:
+      - "443:443"
+      - "8084:80"
