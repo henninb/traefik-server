@@ -1,9 +1,21 @@
+log:
+  level: INFO
+
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+
 api:
   dashboard: true
 
-entryPoints:
-  http:
-    address: ":80"
+# api:
+#   dashboard: true
+#
+# entryPoints:
+#   http:
+#     address: ":80"
 
 providers:
   docker:

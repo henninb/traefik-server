@@ -33,15 +33,15 @@ elif [ "$platform" = "docker" ]; then
   echo docker exec -it --user root traefik-server ss --listen
   echo docker logs traefik-server
 
-  docker run -d -p 8084:80 -p 8083:8080 \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -v $PWD/traefik.yml:/traefik.yml \
-  --name traefik \
-  traefik:v2.5
+  # docker run -d -p 8084:80 -p 8083:8080 \
+  # -v /var/run/docker.sock:/var/run/docker.sock \
+  # -v $PWD/traefik.yml:/traefik.yml \
+  # --name traefik \
+  # traefik:v2.5
 
   if command -v docker-compose; then
-    echo docker-compose build
-    echo docker-compose up -d
+    docker compose build
+    docker compose up -d
   else
     docker build -t traefik-server .
     docker run --name=traefik-server -h traefik-server -h traefik-server --restart unless-stopped -p 443:443 -d traefik-server

@@ -1,14 +1,24 @@
 version: '3.7'
 
 services:
-  traefik-server:
-    image: traefik:v1.7 # The official Traefik docker image
-    #build: .
+  traefik:
+    image: traefik:v2.10.1
     container_name: traefik-server
     hostname: traefik-server
-    command: --api --docker # Enables the web UI and tells Traefik to listen to docker
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
     ports:
-      - "8084:80"     # The HTTP port
-      - "8083:8080" # The Web UI (enabled by --api)
+      - "80:80"
+      - "8080:8080"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  whoami:
+    image: containous/whoami
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.local`)"
+      - "traefik.http.services.whoami.loadbalancer.server.port=80"
