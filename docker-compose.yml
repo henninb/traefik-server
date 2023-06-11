@@ -6,10 +6,15 @@ services:
     container_name: traefik-server
     hostname: traefik-server
     command:
+      - "--api.debug=true"
       - "--api.insecure=true"
+      # - "--api.username=henninb"
+      # - "--api.password=monday1"
+      # - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
+      - "--entryPoints.websecure.address=:443"
       # - "--entrypoints.web.secured.address=:443"
       # - "--log-level=DEBUG"
     ports:
