@@ -1,37 +1,26 @@
 version: '3.7'
 
 services:
-  traefik:
+  traefik-server:
     image: traefik:v2.10.1
     container_name: traefik-server
     hostname: traefik-server
     command:
       - "--api.debug=true"
-      - "--api.insecure=true"
-      # - "--providers.docker=true"
-      # - "--providers.docker.exposedbydefault=false"
+      - "--api.insecure=false"
       - "--entrypoints.web.address=:80"
       - "--entryPoints.websecure.address=:443"
-      # - "--entryPoints.websecure.tls.certfile=/ssl/certificate.crt"
-      # - "--entryPoints.websecure.tls.keyfile=/ssl/privatekey.key"
       - "--providers.file.directory=/etc/traefik/dynamic"
       - "--providers.file.watch=true"
       - "--providers.file.filename=/etc/traefik/dynamic/dynamic.yml"
       - "--configfile=/etc/traefik/traefik.toml"
-      # - "--log-level=DEBUG"
     ports:
       - "80:80"
       - "443:443"
       - "8080:8080"
     volumes:
-      - ./proxy.crt:/ssl/certificate.crt
-      - ./proxy.key:/ssl/privatekey.key
+      - ./traefik.toml:/etc/traefik/traefik.toml
+      - ./proxy.crt:/etc/ssl/certs/proxy.crt
+      - ./proxy.key:/etc/ssl/private/proxy.key
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./dynamic:/etc/traefik/dynamic
-
-  # whoami:
-  #   image: containous/whoami
-  #   labels:
-  #     - "traefik.enable=true"
-  #     - "traefik.http.routers.whoami.rule=Host(`whoami.local`)"
-  #     - "traefik.http.services.whoami.loadbalancer.server.port=80"

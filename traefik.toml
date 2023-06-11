@@ -1,9 +1,29 @@
 [log]
   level = "DEBUG"
+# [providers.acme]
+# [tls.options]
+#   [tls.options.default]
+#     certFile = "/etc/ssl/cert/proxy.crt"
+#     keyFile = "/etc/ssl/private/proxy.key"
+#
+# [tls.stores.default.defaultCertificate]
+#   certFile = "/etc/ssl/cert/proxy.crt"
+#   keyFile = "/etc/ssl/private/proxy.key"
+# [tls.stores]
+#   [tls.stores.default]
+#     [tls.stores.default.defaultCertificate]
+#       certFile = "path/to/cert.crt"
+#       keyFile  = "path/to/cert.key"
+#
+# [defaultTLS]
+#   [defaultTLS.options]
+#     [defaultTLS.options.default]
+#       certFile = "/etc/ssl/cert/proxy.crt"
+#       keyFile = "/etc/ssl/private/proxy.key"
 
-[tls.options]
-  [tls.options.default]
-    [tls.options.default.certificates]
-      [tls.options.default.certificates.certificate]
-        file = "/ssl/certificate.crt"
-        keyFile = "/ssl/privatekey.key"
+# [tls.options]
+#   [tls.options.default]
+#     [tls.options.default.certificates]
+#       [tls.options.default.certificates.certificate]
+#         file = "/etc/ssl/cert/proxy.crt"
+#         keyFile = "/etc/ssl/private/proxy.key"

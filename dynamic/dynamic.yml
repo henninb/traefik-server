@@ -1,11 +1,12 @@
 http:
   routers:
-    router-1:
-      rule: "Host(`pfsense.lan`)"
-      service: service-1
+    pfsense-router:
+      rule: "Host(`pfsense`) || Host(`pfsense.lan`)"
+      service: pfsense-service
+      tls:
+        certResolver: default
   services:
-    service-1:
+    pfsense-service:
       loadBalancer:
         servers:
-          - url: "https://192.168.10.1"
-          - url: "https://192.168.10.2"
+          - url: "https://192.168.10.1:8006"
