@@ -1,8 +1,14 @@
 http:
+  middlewares:
+    pfsense-redirect:
+      redirectScheme:
+        scheme: https
   routers:
     pfsense-router:
       rule: "Host(`pfsense`) || Host(`pfsense.lan`)"
       service: pfsense-service
+      middlewares:
+        - pfsense-redirect
       tls:
         certResolver: default
   services:

@@ -1,11 +1,24 @@
 [log]
+  # filePath = "/var/log/traefik.log"
   level = "DEBUG"
-# [providers.acme]
-# [tls.options]
-#   [tls.options.default]
-#     certFile = "/etc/ssl/cert/proxy.crt"
-#     keyFile = "/etc/ssl/private/proxy.key"
+[tls.stores.default]
+  [tls.stores.default.defaultCertificate]
+      certFile = "/etc/ssl/cert/proxy.crt"
+      keyFile  = "/etc/ssl/private/proxy.key"
+
+[tls.options]
+  [tls.options.default]
+    certFile = "/etc/ssl/cert/proxy.crt"
+    keyFile = "/etc/ssl/private/proxy.key"
+
+[certificatesResolvers.default]
+  [certificatesResolvers.default.acme]
+    email = "henninb@msn.com"
+    storage = "acme.json"
+    [certificatesResolvers.default.acme.httpChallenge]
+      entryPoint = "http"
 #
+# [providers.acme]
 # [tls.stores.default.defaultCertificate]
 #   certFile = "/etc/ssl/cert/proxy.crt"
 #   keyFile = "/etc/ssl/private/proxy.key"
