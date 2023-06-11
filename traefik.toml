@@ -1,0 +1,6 @@
+[tls.options]
+  [tls.options.default]
+    [tls.options.default.certificates]
+      [tls.options.default.certificates.certificate]
+        file = "/ssl/certificate.crt"
+        keyFile = "/ssl/privatekey.key"

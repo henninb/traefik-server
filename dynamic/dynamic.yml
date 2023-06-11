@@ -1,0 +1,11 @@
+http:
+  routers:
+    router-1:
+      rule: "Host(`pfsense.lan`)"
+      service: service-1
+  services:
+    service-1:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.10.1"
+          - url: "https://192.168.10.2"
