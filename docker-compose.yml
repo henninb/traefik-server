@@ -2,7 +2,9 @@ version: '3.7'
 
 services:
   traefik-server:
-    image: traefik:v2.10.1
+    image: traefik-server
+      #image: traefik:v2.10.1
+    build: .
     container_name: traefik-server
     hostname: traefik-server
     command:

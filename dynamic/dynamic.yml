@@ -1,5 +1,8 @@
 http:
   middlewares:
+    forwarded-headers:
+      forwardHeaders:
+        insecure: true
     pfsense-redirect:
       redirectScheme:
         scheme: https
@@ -9,8 +12,9 @@ http:
       service: pfsense-service
       middlewares:
         - pfsense-redirect
-      tls:
-        certResolver: selfsigned
+      # tls:
+      #   {}
+        #certResolver: selfsigned
   services:
     pfsense-service:
       loadBalancer:
