@@ -4,21 +4,36 @@ http:
       redirectScheme:
         scheme: https
 
+    pihole-redirect:
+      redirectScheme:
+        scheme: https
+
   routers:
     pfsense-router:
       rule: "Host(`pfsense`) || Host(`pfsense.lan`)"
       service: pfsense-service
       middlewares:
         - pfsense-redirect
+
+    pihole-router:
+      rule: "Host(`pihole`) || Host(`pihole.lan`)"
+      service: pihole-service
+      middlewares:
+        - pihole-redirect
       # tls:
-      #   {}
-      #   certResolver: selfsigned
+      #   certFile: "/etc/ssl/certs/proxy.crt"
+      #   keyFile: "/etc/ssl/private/proxy.key"
 
   services:
     pfsense-service:
       loadBalancer:
         servers:
           - url: "https://192.168.10.1:8006"
+
+    pihole-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.10"
 
 middlewares:
   forwarded-headers:

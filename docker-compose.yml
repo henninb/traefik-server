@@ -18,8 +18,8 @@ services:
       - "8080:8080"
     volumes:
       - ./traefik.toml:/etc/traefik/traefik.toml
-      - ./proxy.crt:/etc/ssl/certs/proxy.crt
-      - ./proxy.key:/etc/ssl/private/proxy.key
+      # - ./proxy.crt:/etc/ssl/certs/proxy.crt
+      # - ./proxy.key:/etc/ssl/private/proxy.key
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./dynamic:/etc/traefik/dynamic
     # labels:
