@@ -10,7 +10,7 @@ http:
       middlewares:
         - pfsense-redirect
       tls:
-        certResolver: default
+        certResolver: selfsigned
   services:
     pfsense-service:
       loadBalancer:

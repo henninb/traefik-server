@@ -6,16 +6,10 @@ services:
     container_name: traefik-server
     hostname: traefik-server
     command:
-      - "--log.level=DEBUG"
-      - "--api.debug=true"
-      - "--api.insecure=true"
-      - "--entrypoints.web.address=:80"
-      - "--entryPoints.websecure.address=:443"
-      - "--providers.file.directory=/etc/traefik/dynamic"
-      - "--providers.file.watch=true"
-      - "--providers.file.filename=/etc/traefik/dynamic/dynamic.yml"
+      # - "--providers.file.directory=/etc/traefik/dynamic"
+      # - "--providers.file.watch=true"
+      # - "--providers.file.filename=/etc/traefik/dynamic/dynamic.yml"
       - "--configfile=/etc/traefik/traefik.toml"
-      - "--log.filepath=/var/log/traefik.log"
     ports:
       - "80:80"
       - "443:443"
