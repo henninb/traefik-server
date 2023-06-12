@@ -12,15 +12,21 @@ http:
     pfsense-router:
       rule: "Host(`pfsense`) || Host(`pfsense.lan`)"
       service: pfsense-service
+      tls: true
+      entryPoints:
+        - websecure
       middlewares:
         - pfsense-redirect
 
     pihole-router:
       rule: "Host(`pihole`) || Host(`pihole.lan`)"
       service: pihole-service
+      tls: true
+      entryPoints:
+        - websecure
       middlewares:
         - pihole-redirect
-      certResolver: another
+          #certResolver: another
       # tls:
       #   certFile: "/etc/ssl/certs/proxy.crt"
       #   keyFile: "/etc/ssl/private/proxy.key"
@@ -40,3 +46,15 @@ middlewares:
   forwarded-headers:
     forwardHeaders:
       insecure: true
+
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/ssl/certs/proxy.crt
+        keyFile: /etc/ssl/private/proxy.key 
+  certificates:
+    - certFile: /etc/ssl/certs/proxy.crt 
+      keyFile: /etc/ssl/private/proxy.key
+      stores:
+        - default

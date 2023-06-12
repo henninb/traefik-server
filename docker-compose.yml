@@ -3,32 +3,16 @@ version: '3.7'
 services:
   traefik-server:
     image: traefik-server
-      #image: traefik:v2.10.1
     build: .
     container_name: traefik-server
     hostname: traefik-server
     command:
-      # - "--providers.file.directory=/etc/traefik/dynamic"
-      # - "--providers.file.watch=true"
-      # - "--providers.file.filename=/etc/traefik/dynamic/dynamic.yml"
       - "--configfile=/etc/traefik/traefik.toml"
     ports:
-      - "80:80"
+            # - "80:80"
       - "443:443"
-      - "8080:8080"
+        #     - "8080:8080"
     volumes:
       - ./traefik.toml:/etc/traefik/traefik.toml
-      # - ./proxy.crt:/etc/ssl/certs/proxy.crt
-      # - ./proxy.key:/etc/ssl/private/proxy.key
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./dynamic:/etc/traefik/dynamic
-    # labels:
-    #   - "traefik.enable=true"
-    #
-    #   # Configure secure entrypoint (":443")
-    #   - "traefik.http.routers.traefik-secure.entrypoints=websecure"
-    #   - "traefik.http.routers.traefik-secure.tls=true"
-    #   - "traefik.http.routers.traefik-secure.rule=Host(`example.com`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
-    #   - "traefik.http.routers.traefik-secure.service=api@internal"
-    #   - "traefik.http.routers.traefik-secure.middlewares=simpleAuth@file"
-    #   - "traefik.http.routers.traefik-secure.middlewares=mylan@file"

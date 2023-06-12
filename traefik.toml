@@ -14,7 +14,7 @@
   filename = "/etc/traefik/dynamic/dynamic.yml"
 
 [log]
-  level = "DEBUG"
+  level = "ERROR"
 
 [tls.certificates]
   [tls.certificates.default]

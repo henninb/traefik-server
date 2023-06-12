@@ -40,8 +40,8 @@ elif [ "$platform" = "docker" ]; then
   # traefik:v2.5
 
   if command -v docker-compose; then
-    docker compose build
-    docker compose up -d
+    docker-compose build
+    docker-compose up -d
   else
     docker build -t traefik-server .
     docker run --name=traefik-server -h traefik-server -h traefik-server --restart unless-stopped -p 443:443 -d traefik-server
