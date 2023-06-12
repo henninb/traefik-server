@@ -8,6 +8,10 @@
 [api]
   insecure = true
 
+[providers]
+  [providers.file]
+  filename = "/etc/traefik/dynamic/dynamic.yml"
+
 [log]
   level = "DEBUG"
 
