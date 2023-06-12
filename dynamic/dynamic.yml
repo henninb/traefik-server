@@ -1,11 +1,9 @@
 http:
   middlewares:
-    forwarded-headers:
-      forwardHeaders:
-        insecure: true
     pfsense-redirect:
       redirectScheme:
         scheme: https
+
   routers:
     pfsense-router:
       rule: "Host(`pfsense`) || Host(`pfsense.lan`)"
@@ -14,9 +12,15 @@ http:
         - pfsense-redirect
       # tls:
       #   {}
-        #certResolver: selfsigned
+      #   certResolver: selfsigned
+
   services:
     pfsense-service:
       loadBalancer:
         servers:
           - url: "https://192.168.10.1:8006"
+
+middlewares:
+  forwarded-headers:
+    forwardHeaders:
+      insecure: true
