@@ -20,6 +20,7 @@ http:
       service: pihole-service
       middlewares:
         - pihole-redirect
+      certResolver: another
       # tls:
       #   certFile: "/etc/ssl/certs/proxy.crt"
       #   keyFile: "/etc/ssl/private/proxy.key"

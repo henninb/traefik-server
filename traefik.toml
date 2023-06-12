@@ -16,13 +16,20 @@
 [log]
   level = "DEBUG"
 
-[tls]
-  [[tls.certificates]]
+[tls.certificates]
+  [tls.certificates.default]
     certFile = "/etc/ssl/certs/proxy.crt"
     keyFile = "/etc/ssl/private/proxy.key"
-
-[tls.stores]
-  [tls.stores.default]
-    [tls.stores.default.defaultCertificate]
-      certFile = "/etc/ssl/certs/proxy.crt"
-      keyFile = "/etc/ssl/private/proxy.key"
+  [tls.certificates.another]
+    certFile = "/etc/ssl/certs/proxy.crt"
+    keyFile = "/etc/ssl/private/proxy.key"
+# [tls]
+#   [[tls.certificates]]
+#     certFile = "/etc/ssl/certs/proxy.crt"
+#     keyFile = "/etc/ssl/private/proxy.key"
+#
+# [tls.stores]
+#   [tls.stores.default]
+#     [tls.stores.default.defaultCertificate]
+#       certFile = "/etc/ssl/certs/proxy.crt"
+#       keyFile = "/etc/ssl/private/proxy.key"
