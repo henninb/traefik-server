@@ -11,25 +11,12 @@
 
 [providers]
   [providers.file]
-  filename = "/etc/traefik/dynamic/dynamic.yml"
+  filename = "/etc/traefik/dynamic/dynamic1.yml"
 
 [log]
-  level = "ERROR"
+  level = "DEBUG"
 
 [tls.certificates]
   [tls.certificates.default]
     certFile = "/etc/ssl/certs/proxy.crt"
     keyFile = "/etc/ssl/private/proxy.key"
-  [tls.certificates.another]
-    certFile = "/etc/ssl/certs/proxy.crt"
-    keyFile = "/etc/ssl/private/proxy.key"
-# [tls]
-#   [[tls.certificates]]
-#     certFile = "/etc/ssl/certs/proxy.crt"
-#     keyFile = "/etc/ssl/private/proxy.key"
-#
-# [tls.stores]
-#   [tls.stores.default]
-#     [tls.stores.default.defaultCertificate]
-#       certFile = "/etc/ssl/certs/proxy.crt"
-#       keyFile = "/etc/ssl/private/proxy.key"
