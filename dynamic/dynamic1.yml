@@ -1,38 +1,16 @@
 http:
-  middlewares:
-    pfsense-redirect:
-      redirectScheme:
-        scheme: https
-
-    pihole-redirect:
-      redirectScheme:
-        scheme: https
-        #    https-termination:
-        #tls:
-        #cert:
-        #  file: /etc/ssl/certs/proxy.crt
-        #key:
-        #  file: /etc/ssl/private/proxy.key
-
   routers:
     pfsense-router:
       rule: "Host(`pfsense`) || Host(`pfsense.lan`)"
       service: pfsense-service
       entryPoints:
         - websecure
-      tls:
-        domains:
-          - main: "pfsense.lan"
-      middlewares:
-        - pfsense-redirect
 
     pihole-router:
       rule: "Host(`pihole`) || Host(`pihole.lan`)"
       service: pihole-service
       entryPoints:
         - websecure
-      middlewares:
-        - pihole-redirect
 
   services:
     pfsense-service:
