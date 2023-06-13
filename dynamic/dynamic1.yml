@@ -7,6 +7,12 @@ http:
     pihole-redirect:
       redirectScheme:
         scheme: https
+        #    https-termination:
+        #tls:
+        #cert:
+        #  file: /etc/ssl/certs/proxy.crt
+        #key:
+        #  file: /etc/ssl/private/proxy.key
 
   routers:
     pfsense-router:

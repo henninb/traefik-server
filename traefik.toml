@@ -15,8 +15,3 @@
 
 [log]
   level = "DEBUG"
-
-[tls.certificates]
-  [tls.certificates.default]
-    certFile = "/etc/ssl/certs/proxy.crt"
-    keyFile = "/etc/ssl/private/proxy.key"
