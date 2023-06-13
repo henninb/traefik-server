@@ -15,3 +15,6 @@
 
 [log]
   level = "DEBUG"
+
+[serversTransport]
+  insecureSkipVerify = true

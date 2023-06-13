@@ -1,4 +1,8 @@
 http:
+        #  middlewares:
+        # pfsense-insecure:
+        #tls: 
+        # - insecureSkipVerify: true
   routers:
     pfsense-router:
       rule: "Host(`pfsense`) || Host(`pfsense.lan`)"
@@ -12,11 +16,23 @@ http:
       entryPoints:
         - websecure
 
+    finance-router:
+      rule: "Host(`finance`) || Host(`finance.lan`)"
+      service: finance-service
+      entryPoints:
+        - websecure
   services:
     pfsense-service:
       loadBalancer:
         servers:
           - url: "https://192.168.10.1:8006"
+            #          tls:
+            #  insecureSkipVerify: true
+
+    finance-service:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.10.10:3000"
 
     pihole-service:
       loadBalancer:
@@ -27,6 +43,9 @@ tls:
   certificates:
     certFile: /etc/ssl/certs/proxy.crt
     keyFile: /etc/ssl/private/proxy.key
+    #   rootCA:
+    #    files:
+    #      - /etc/ssl/certs/proxy.crt
   stores:
     default:
       defaultCertificate:
