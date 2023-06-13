@@ -1,8 +1,4 @@
 http:
-        #  middlewares:
-        # pfsense-insecure:
-        #tls: 
-        # - insecureSkipVerify: true
   routers:
     pfsense-router:
       rule: "Host(`pfsense`) || Host(`pfsense.lan`)"
@@ -21,18 +17,39 @@ http:
       service: finance-service
       entryPoints:
         - websecure
+
+    proxmox-router:
+      rule: "Host(`proxmox`) || Host(`proxmox.lan`)"
+      service: proxmox-service
+      entryPoints:
+        - websecure
+
+    ddwrt-router:
+      rule: "Host(`ddwrt`) || Host(`ddwrt.lan`)"
+      service: ddwrt-service
+      entryPoints:
+        - websecure
+
   services:
     pfsense-service:
       loadBalancer:
         servers:
           - url: "https://192.168.10.1:8006"
-            #          tls:
-            #  insecureSkipVerify: true
 
     finance-service:
       loadBalancer:
         servers:
           - url: "https://192.168.10.10:3000"
+
+    proxmox-service:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.10.4:8006"
+
+    ddwrt-service:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.10.2"
 
     pihole-service:
       loadBalancer:
