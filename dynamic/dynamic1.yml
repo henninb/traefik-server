@@ -37,7 +37,9 @@ http:
     pihole-service:
       loadBalancer:
         servers:
-          - url: "http://192.168.10.10"
+          url: "http://192.168.10.10"
+          scheme: "https"
+          insecureSkipVerify: true
 
 tls:
   options:
