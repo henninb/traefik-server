@@ -40,7 +40,6 @@ elif [ "$platform" = "docker" ]; then
   # traefik:v2.5
 
   if command -v docker-compose; then
-    cp ~/ssl/rootCA.pem ~/projects/github.com/henninb/traefik-server/
     docker compose build
     docker compose up -d
   else
