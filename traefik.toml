@@ -18,3 +18,5 @@
 
 [serversTransport]
   insecureSkipVerify = true
+#  rootCAs:
+#    - yourCAcert.crt
