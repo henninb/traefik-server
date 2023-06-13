@@ -14,7 +14,8 @@
   filename = "/etc/traefik/dynamic/reverse-proxy.yml"
 
 [log]
-  level = "DEBUG"
+  level = "INFO"
+#  level = "DEBUG"
 
 [serversTransport]
   insecureSkipVerify = true
