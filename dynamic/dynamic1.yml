@@ -41,8 +41,8 @@ http:
 
 tls:
   certificates:
-    - certFile: /etc/ssl/certs/proxy.crt
-      keyFile: /etc/ssl/private/proxy.key
+    certFile: /etc/ssl/certs/proxy.crt
+    keyFile: /etc/ssl/private/proxy.key
   stores:
     default:
       defaultCertificate:
