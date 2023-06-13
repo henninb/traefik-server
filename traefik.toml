@@ -11,7 +11,7 @@
 
 [providers]
   [providers.file]
-  filename = "/etc/traefik/dynamic/dynamic1.yml"
+  filename = "/etc/traefik/dynamic/reverse-proxy.yml"
 
 [log]
   level = "DEBUG"
