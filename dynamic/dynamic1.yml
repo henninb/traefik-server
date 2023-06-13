@@ -37,22 +37,9 @@ http:
     pihole-service:
       loadBalancer:
         servers:
-          url: "http://192.168.10.10"
-          scheme: "https"
-          insecureSkipVerify: true
+          - url: "http://192.168.10.10"
 
 tls:
-  options:
-    default:
-      minVersion: VersionTLS13
-      cipherSuites:
-        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-        - TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-    myTLSOptions:
-      minVersion: VersionTLS12
-      cipherSuites:
-        - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
-        - TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
   certificates:
     - certFile: /etc/ssl/certs/proxy.crt
       keyFile: /etc/ssl/private/proxy.key
