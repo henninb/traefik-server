@@ -6,6 +6,7 @@ services:
     build: .
     container_name: traefik-server
     hostname: traefik-server
+    restart: always
     command:
       - "--configfile=/etc/traefik/traefik.toml"
     ports:
