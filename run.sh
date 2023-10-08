@@ -15,7 +15,7 @@ if [ "$platform" = "podman" ]; then
 
   echo 0 | sudo tee /proc/sys/net/ipv4/ip_unprivileged_port_start
   podman-compose build
-  podman-compose up
+  podman-compose up -d
 elif [ "$platform" = "docker" ]; then
   docker stop traefik-server
   echo docker rm -f traefik-server
@@ -32,12 +32,6 @@ elif [ "$platform" = "docker" ]; then
   echo docker exec -it --user root traefik-server /bin/bash
   echo docker exec -it --user root traefik-server ss --listen
   echo docker logs traefik-server
-
-  # docker run -d -p 8084:80 -p 8083:8080 \
-  # -v /var/run/docker.sock:/var/run/docker.sock \
-  # -v $PWD/traefik.yml:/traefik.yml \
-  # --name traefik \
-  # traefik:v2.5
 
   if command -v docker-compose; then
     docker compose build
