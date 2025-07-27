@@ -1,34 +1,179 @@
 http:
+  middlewares:
+    security-headers:
+      headers:
+        frameDeny: true
+        contentTypeNosniff: true
+        browserXSSFilter: true
+        referrerPolicy: "strict-origin-when-cross-origin"
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+        customResponseHeaders:
+          X-Frame-Options: "DENY"
+          X-Content-Type-Options: "nosniff"
+          X-XSS-Protection: "1; mode=block"
+          Referrer-Policy: "strict-origin-when-cross-origin"
+
   routers:
-    pfsense-router:
-      rule: "Host(`pfsense`) || Host(`pfsense.lan`)"
+    pfsense-bhenning-router:
+      rule: "Host(`pfsense.bhenning.com`)"
       service: pfsense-service
       entryPoints:
         - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
 
-    pihole-router:
-      rule: "Host(`pihole`) || Host(`pihole.lan`)"
-      service: pihole-service
+    pfsense-brianhenning-router:
+      rule: "Host(`pfsense.brianhenning.com`)"
+      service: pfsense-service
       entryPoints:
         - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
 
-    finance-router:
-      rule: "Host(`finance`) || Host(`finance.lan`)"
+    finance-bhenning-router:
+      rule: "Host(`finance.bhenning.com`)"
       service: finance-service
       entryPoints:
         - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
 
-    proxmox-router:
-      rule: "Host(`proxmox`) || Host(`proxmox.lan`)"
-      service: proxmox-service
+    finance-brianhenning-router:
+      rule: "Host(`finance.brianhenning.com`)"
+      service: finance-service
       entryPoints:
         - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
 
-    ddwrt-router:
-      rule: "Host(`ddwrt`) || Host(`ddwrt.lan`)"
+    gitlab-bhenning-router:
+      rule: "Host(`gitlab.bhenning.com`)"
+      service: gitlab-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    gitlab-brianhenning-router:
+      rule: "Host(`gitlab.brianhenning.com`)"
+      service: gitlab-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    ddwrt-bhenning-router:
+      rule: "Host(`ddwrt.bhenning.com`)"
       service: ddwrt-service
       entryPoints:
         - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    ddwrt-brianhenning-router:
+      rule: "Host(`ddwrt.brianhenning.com`)"
+      service: ddwrt-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    jellyfin-bhenning-router:
+      rule: "Host(`jellyfin.bhenning.com`)"
+      service: jellyfin-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    jellyfin-brianhenning-router:
+      rule: "Host(`jellyfin.brianhenning.com`)"
+      service: jellyfin-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    proxmox-bhenning-router:
+      rule: "Host(`proxmox.bhenning.com`)"
+      service: proxmox-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    proxmox-brianhenning-router:
+      rule: "Host(`proxmox.brianhenning.com`)"
+      service: proxmox-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    switch0-bhenning-router:
+      rule: "Host(`switch0.bhenning.com`)"
+      service: switch0-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    switch0-brianhenning-router:
+      rule: "Host(`switch0.brianhenning.com`)"
+      service: switch0-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    switch1-bhenning-router:
+      rule: "Host(`switch1.bhenning.com`)"
+      service: switch1-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
+
+    switch1-brianhenning-router:
+      rule: "Host(`switch1.brianhenning.com`)"
+      service: switch1-service
+      entryPoints:
+        - websecure
+      middlewares:
+        - security-headers
+      tls:
+        certResolver: "default"
 
   services:
     pfsense-service:
@@ -39,22 +184,37 @@ http:
     finance-service:
       loadBalancer:
         servers:
-          - url: "https://192.168.10.10:3000"
+          - url: "http://192.168.10.10:8443"
 
-    proxmox-service:
+    gitlab-service:
       loadBalancer:
         servers:
-          - url: "https://192.168.10.4:8006"
+          - url: "http://192.168.10.10:80"
 
     ddwrt-service:
       loadBalancer:
         servers:
-          - url: "https://192.168.10.2"
+          - url: "https://192.168.20.2:443"
 
-    pihole-service:
+    jellyfin-service:
       loadBalancer:
         servers:
-          - url: "http://192.168.10.10"
+          - url: "http://10.0.0.175:8096"
+
+    proxmox-service:
+      loadBalancer:
+        servers:
+          - url: "https://192.168.10.5:8006"
+
+    switch0-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.30:80"
+
+    switch1-service:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.10.31:80"
 
 tls:
   certificates:
