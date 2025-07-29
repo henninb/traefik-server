@@ -12,10 +12,11 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      # - "8080:8080"
     volumes:
       - ./traefik.toml:/etc/traefik/traefik.toml
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./dynamic:/etc/traefik/dynamic
-      - ./proxy.crt:/etc/ssl/certs/proxy.crt:ro
-      - ./proxy.key:/etc/ssl/private/proxy.key:ro
+      - ./brianhenning.fullchain.pem:/etc/ssl/certs/brianhenning.fullchain.pem:ro
+      - ./brianhenning.privkey.pem:/etc/ssl/private/brianhenning.fprivatekey.pem:ro
+      - ./bhenning.fullchain.pem:/etc/ssl/certs/bhenning.fullchain.pem:ro
+      - ./bhenning.privkey.pem:/etc/ssl/private/bhenning.privatekey.pem:ro
