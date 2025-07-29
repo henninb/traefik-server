@@ -7,26 +7,17 @@
 
   [entryPoints.websecure]
     address = ":443"
-    [entryPoints.websecure.http.tls]
-      minVersion = "VersionTLS12"
-      cipherSuites = [
-        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
-        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
-        "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305",
-        "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256",
-        "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"
-      ]
 
 [api]
   insecure = true
 
 [providers]
   [providers.file]
-  filename = "/etc/traefik/dynamic/reverse-proxy.yml"
+  filename = "/app/dynamic/reverse-proxy.yml"
 
 [log]
-  level = "INFO"
-#  level = "DEBUG"
+#  level = "INFO"
+  level = "DEBUG"
 
 [serversTransport]
   insecureSkipVerify = true

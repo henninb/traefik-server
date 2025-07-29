@@ -22,8 +22,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     pfsense-brianhenning-router:
       rule: "Host(`pfsense.brianhenning.com`)"
@@ -32,8 +31,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     finance-bhenning-router:
       rule: "Host(`finance.bhenning.com`)"
@@ -42,8 +40,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     finance-brianhenning-router:
       rule: "Host(`finance.brianhenning.com`)"
@@ -52,8 +49,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     gitlab-bhenning-router:
       rule: "Host(`gitlab.bhenning.com`)"
@@ -62,8 +58,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     gitlab-brianhenning-router:
       rule: "Host(`gitlab.brianhenning.com`)"
@@ -72,8 +67,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     ddwrt-bhenning-router:
       rule: "Host(`ddwrt.bhenning.com`)"
@@ -82,8 +76,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     ddwrt-brianhenning-router:
       rule: "Host(`ddwrt.brianhenning.com`)"
@@ -92,8 +85,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     jellyfin-bhenning-router:
       rule: "Host(`jellyfin.bhenning.com`)"
@@ -102,8 +94,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     jellyfin-brianhenning-router:
       rule: "Host(`jellyfin.brianhenning.com`)"
@@ -112,8 +103,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     proxmox-bhenning-router:
       rule: "Host(`proxmox.bhenning.com`)"
@@ -122,8 +112,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     proxmox-brianhenning-router:
       rule: "Host(`proxmox.brianhenning.com`)"
@@ -132,8 +121,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     switch0-bhenning-router:
       rule: "Host(`switch0.bhenning.com`)"
@@ -142,8 +130,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     switch0-brianhenning-router:
       rule: "Host(`switch0.brianhenning.com`)"
@@ -152,8 +139,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     switch1-bhenning-router:
       rule: "Host(`switch1.bhenning.com`)"
@@ -162,8 +148,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
     switch1-brianhenning-router:
       rule: "Host(`switch1.brianhenning.com`)"
@@ -172,8 +157,7 @@ http:
         - websecure
       middlewares:
         - security-headers
-      tls:
-        certResolver: "default"
+      tls: {}
 
   services:
     pfsense-service:
@@ -218,13 +202,21 @@ http:
 
 tls:
   certificates:
-    certFile: /etc/ssl/certs/proxy.crt
-    keyFile: /etc/ssl/private/proxy.key
-    #   rootCA:
-    #    files:
-    #      - /etc/ssl/certs/proxy.crt
+    - certFile: /app/bhenning.fullchain.pem
+      keyFile: /app/bhenning.privkey.pem
+    - certFile: /app/brianhenning.fullchain.pem
+      keyFile: /app/brianhenning.privkey.pem
   stores:
     default:
       defaultCertificate:
-        certFile: /etc/ssl/certs/proxy.crt
-        keyFile: /etc/ssl/private/proxy.key
+        certFile: /app/bhenning.fullchain.pem
+        keyFile: /app/bhenning.privkey.pem
+  options:
+    default:
+      minVersion: "VersionTLS12"
+      cipherSuites:
+        - "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+        - "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
+        - "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305"
+        - "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
+        - "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA"

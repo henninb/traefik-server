@@ -19,11 +19,7 @@ docker build -t traefik-server .
 docker images
 docker rm -f traefik-server
 
-docker run --name=traefik-server -h traefik-server --restart unless-stopped \
-  -p 80:80 -p 443:443 \
-  -v ./traefik.toml:/etc/traefik/traefik.toml \
-  -v ./dynamic:/etc/traefik/dynamic \
-  -d traefik-server
+docker run --name=traefik-server -h traefik-server --restart unless-stopped -p 443:443 -d traefik-server
 
 docker ps -a
 
